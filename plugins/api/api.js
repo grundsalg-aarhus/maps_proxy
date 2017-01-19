@@ -4,6 +4,7 @@
  */
 
 var Q = require('q');
+var request = require('request');
 
 /**
  * This object encapsulate the RESET API.
@@ -27,6 +28,31 @@ var API = function (app, logger, options) {
     res.status(200);
     res.send('Hello world');
     res.end();
+  });
+
+  app.get('/api/kfticket', function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*');
+
+    var cred = options.kortforsyningen;
+    var url = 'http://services.kortforsyningen.dk/service?request=GetTicket&login=' + cred.username + '&password=' + cred.password;
+    request(url, function (error, response, body) {
+      if (error || response.statusCode !== 200) {
+        res.status(400);
+        res.end();
+      }
+      else if (body.indexOf('<') !== -1) {
+        // Contains HTML and not a ticket.
+        res.status(400);
+        res.send(body);
+        res.end();
+      }
+      else {
+        console.log('SEND 200 with BODY');
+        res.status(200);
+        res.send(body);
+        res.end();
+      }
+    });
   });
 };
 

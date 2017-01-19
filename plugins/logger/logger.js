@@ -18,8 +18,6 @@ var Logger = function Logger(logs) {
   "use strict";
 
   var levels = winston.config.syslog.levels;
-  levels['socket'] = 8;
-  winston.setLevels(levels);
 
   if (logs.hasOwnProperty('info')) {
     this.infoLog = new (winston.Logger)({
@@ -96,30 +94,6 @@ var Logger = function Logger(logs) {
       exitOnError: false
     });
   }
-
-  if (logs.hasOwnProperty('exception')) {
-    this.excepLog = new (winston.Logger)({
-      levels: levels,
-      transports: [
-        new Rotate({
-          file: path.join(__dirname, '../../' + logs.exception),
-          level: 'exceptions-file',
-          colorize: false,
-          timestamp: true,
-          json: false,
-          max: '100m',
-          keep: 5,
-          compress: false
-        }),
-        new (winston.transports.Console)({
-          colorize: true,
-          level: 'exceptions-file',
-          timestamp: timeFormatFn
-        })
-      ],
-      exitOnError: true
-    });
-  }
 };
 
 /**
@@ -161,25 +135,6 @@ Logger.prototype.debug = function debug(message) {
 
   if (this.debugLog !== undefined) {
     this.debugLog.debug(message);
-  }
-};
-
-/**
- * Log socket message.
- *
- * @param message
- *   The message to send to the logger.
- */
-Logger.prototype.socket = function socket(message, data) {
-  "use strict";
-
-  if (this.socketLog !== undefined) {
-    if (data !== undefined) {
-      this.socketLog.log('socket', message + ' <-:-> ', JSON.stringify(data));
-    }
-    else {
-      this.socketLog.log('socket', message);
-    }
   }
 };
 

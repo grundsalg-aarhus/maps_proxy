@@ -2,9 +2,12 @@
   "port": 3010,
   "secret": "MySuperSecret",
   "logs": {
-    "all": "logs/messages.log",
     "info": "logs/info.log",
     "error": "logs/error.log",
     "debug": "logs/debug.log"
+  },
+  "kortforsyningen": {
+  	"username": "",
+  	"password": ""
   }
 }

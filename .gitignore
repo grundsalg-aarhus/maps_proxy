@@ -2,3 +2,4 @@ logs/*.log
 .patch
 .diff
 node_modules
+config.json
