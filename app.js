@@ -26,7 +26,8 @@ var plugins = [
   },
   {
     packagePath: './plugins/api',
-    secrect: config.secrect,
+    secret: config.secret,
+    apikey: config.apikey,
     kortforsyningen: config.kortforsyningen
   }
 ];

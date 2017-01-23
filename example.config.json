@@ -1,6 +1,7 @@
 {
   "port": 3010,
   "secret": "MySuperSecret",
+  "api-key": "MySuperApiKey",
   "logs": {
     "info": "logs/info.log",
     "error": "logs/error.log",
