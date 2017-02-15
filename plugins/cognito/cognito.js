@@ -32,7 +32,6 @@ let Cognito = function Cognito(logger, cache, options) {
     'Longitude'
   ];
 
-
   this.connection = new sql.Connection({
     user: this.config.user,
     password: this.config.password,
@@ -45,6 +44,14 @@ let Cognito = function Cognito(logger, cache, options) {
   });
 };
 
+/**
+ * Get information about a branch by id.
+ *
+ * @param {number} id
+ *   The id of the branch to fetch information
+ * @returns {*|promise}
+ *   When resolved GeoJson is returned else an error.
+ */
 Cognito.prototype.getBranchById = function getBranchById(id) {
   let self = this;
   let deferred = Q.defer();
