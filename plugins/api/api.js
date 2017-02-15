@@ -52,11 +52,11 @@ let API = function (app, logger, cognito, options) {
     });
   });
 
-  app.get('/api/cognito/branch/:id', function (req, res) {
+  app.get('/api/industry/:id', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*');
 
     if (req.params.hasOwnProperty('id')) {
-      cognito.getBranchById(req.params.id).then(function (json) {
+      cognito.getIndustryById(req.params.id).then(function (json) {
         res.status(200).json(json);
       });
     }

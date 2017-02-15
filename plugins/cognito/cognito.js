@@ -45,14 +45,14 @@ let Cognito = function Cognito(logger, cache, options) {
 };
 
 /**
- * Get information about a branch by id.
+ * Get information about a industry by id.
  *
  * @param {number} id
- *   The id of the branch to fetch information
+ *   The id of the industry to fetch information
  * @returns {*|promise}
  *   When resolved GeoJson is returned else an error.
  */
-Cognito.prototype.getBranchById = function getBranchById(id) {
+Cognito.prototype.getIndustryById = function getIndustryById(id) {
   let self = this;
   let deferred = Q.defer();
 
@@ -67,7 +67,6 @@ Cognito.prototype.getBranchById = function getBranchById(id) {
     else {
       if (res !== null) {
         deferred.resolve(JSON.parse(res));
-        console.log('Cache hit');
       }
       else {
         new sql.Request(self.connection).query(query).then(function(records) {
@@ -85,6 +84,9 @@ Cognito.prototype.getBranchById = function getBranchById(id) {
           for (let i in records) {
             let record = records[i];
 
+            // Fixes strings.
+            record.PostDistrikt = record.PostDistrikt.trim();
+
             // Add markers
             record.markers = true;
 
@@ -92,7 +94,7 @@ Cognito.prototype.getBranchById = function getBranchById(id) {
               type: 'Feature',
               geometry: {
                 type: 'Point',
-                coordinates: [record.Longitude, record.Latitude],
+                coordinates: [record.Longitude.replace(',', '.'), record.Latitude.replace(',', '.')],
               },
               properties: record
             });
