@@ -7,14 +7,14 @@
  */
 'use strict';
 
-var path = require('path');
-var architect = require('architect');
+const path = require('path');
+const architect = require('architect');
 
 // Load config file.
-var config = require(__dirname + '/config.json');
+const config = require(__dirname + '/config.json');
 
 // Configure the plugins.
-var plugins = [
+let plugins = [
   {
     packagePath: './plugins/logger',
     logs: config.logs
@@ -27,12 +27,23 @@ var plugins = [
   {
     packagePath: './plugins/api',
     kortforsyningen: config.kortforsyningen
-  }
+  },
+  {
+    packagePath: "./plugins/cache",
+    config: config.cache
+  },
+  {
+    packagePath: './plugins/cognito',
+    user: config.cognito.user,
+    password: config.cognito.password,
+    server: config.cognito.server,
+    database: config.cognito.database,
+    kommunenummer: config.cognito.kommunenummer
+  },
 ];
 
 // User the configuration to start the application.
-config = architect.resolveConfig(plugins, __dirname);
-architect.createApp(config, function (err, app) {
+architect.createApp(architect.resolveConfig(plugins, __dirname), function (err, app) {
   if (err) {
     throw err;
   }

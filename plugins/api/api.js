@@ -3,22 +3,23 @@
  * Added API to send content into the search engine
  */
 
-var Q = require('q');
-var request = require('request');
+const Q = require('q');
+const request = require('request');
 
 /**
  * This object encapsulate the RESET API.
  *
  * @param app
  * @param logger
+ * @param cognito
  * @param options
  *
  * @constructor
  */
-var API = function (app, logger, options) {
+let API = function (app, logger, cognito, options) {
   "use strict";
 
-  var self = this;
+  let self = this;
   this.logger = logger;
 
   app.get('/api', function (req, res) {
@@ -30,8 +31,8 @@ var API = function (app, logger, options) {
   app.get('/api/kfticket', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*');
 
-    var cred = options.kortforsyningen;
-    var url = 'http://services.kortforsyningen.dk/service?request=GetTicket&login=' + cred.username + '&password=' + cred.password;
+    let cred = options.kortforsyningen;
+    let url = 'http://services.kortforsyningen.dk/service?request=GetTicket&login=' + cred.username + '&password=' + cred.password;
     request(url, function (error, response, body) {
       if (error || response.statusCode !== 200) {
         res.status(400);
@@ -44,12 +45,25 @@ var API = function (app, logger, options) {
         res.end();
       }
       else {
-        console.log('SEND 200 with BODY');
         res.status(200);
         res.send(body);
         res.end();
       }
     });
+  });
+
+  app.get('/api/cognito/branch/:id', function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*');
+
+    if (req.params.hasOwnProperty('id')) {
+      cognito.getBranchById(req.params.id).then(function (json) {
+        res.status(200).json(json);
+      });
+    }
+    else {
+      self.logger.error('API: missing id parameter in cognito branch.');
+      res.status(500).send('Missing parameter.');
+    }
   });
 };
 
@@ -60,7 +74,7 @@ module.exports = function (options, imports, register) {
   "use strict";
 
   // Create the API routes using the API object.
-  var api = new API(imports.app, imports.logger, options);
+  let api = new API(imports.app, imports.logger, imports.cognito, options);
 
   // This plugin extends the server plugin and do not provide new services.
   register(null, null);

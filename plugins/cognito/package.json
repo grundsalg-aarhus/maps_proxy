@@ -1,0 +1,20 @@
+{
+  "name": "KMDCognito",
+  "description": "Spatial data from KMDCognito MSSQL server",
+  "version": "0.0.1",
+  "main": "cognito.js",
+  "private": true,
+  "dependencies": {
+    "mssql": "^3.3.0",
+    "q": "^1.4.1"
+  },
+  "plugin": {
+    "consumes": [
+      "logger",
+      "cache"
+    ],
+    "provides": [
+      "cognito"
+    ]
+  }
+}

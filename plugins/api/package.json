@@ -13,7 +13,8 @@
   "plugin": {
     "consumes": [
       "app",
-      "logger"
+      "logger",
+      "cognito"
     ]
   }
 }
