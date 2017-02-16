@@ -87,7 +87,7 @@ Cognito.prototype.getIndustryById = function getIndustryById(id) {
             // Fixes strings.
             record.PostDistrikt = record.PostDistrikt.trim();
 
-            // Add markers
+            // Add markers (to make the front-end add popups).
             record.markers = true;
 
             geoJson.features.push({

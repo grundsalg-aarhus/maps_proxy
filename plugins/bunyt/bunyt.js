@@ -95,6 +95,10 @@ BUnyt.prototype.getInstitutionByType = function getInstitutionByType(type) {
                 // Build GeoJson feature for each marker based on type.
                 for (let i in json.markers.marker) {
                   let marker = json.markers.marker[i]['$'];
+
+                  // Add markers (to make the front-end add popups).
+                  marker.markers = true;
+
                   institution[marker.enhtype].features.push({
                     type: 'Feature',
                     geometry: {
