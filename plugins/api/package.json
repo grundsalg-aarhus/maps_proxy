@@ -14,7 +14,8 @@
     "consumes": [
       "app",
       "logger",
-      "cognito"
+      "cognito",
+      "bunyt"
     ]
   }
 }

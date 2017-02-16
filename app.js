@@ -40,6 +40,10 @@ let plugins = [
     database: config.cognito.database,
     kommunenummer: config.cognito.kommunenummer
   },
+  {
+    packagePath: './plugins/bunyt',
+    url: config.bunyt.url,
+  }
 ];
 
 // User the configuration to start the application.
