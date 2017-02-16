@@ -43,6 +43,10 @@ let plugins = [
   {
     packagePath: './plugins/bunyt',
     url: config.bunyt.url,
+  },
+  {
+    packagePath: './plugins/midttrafik',
+    url: config.midttrafik.url,
   }
 ];
 

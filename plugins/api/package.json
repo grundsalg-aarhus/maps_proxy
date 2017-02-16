@@ -15,7 +15,8 @@
       "app",
       "logger",
       "cognito",
-      "bunyt"
+      "bunyt",
+      "midttrafik"
     ]
   }
 }

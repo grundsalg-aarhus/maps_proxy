@@ -115,11 +115,10 @@ BUnyt.prototype.getInstitutionByType = function getInstitutionByType(type) {
                     self.logger.error(err);
                   }
                 });
+
                 deferred.resolve(institution[type]);
               }
             });
-
-            deferred.resolve(body);
           }
         });
       }
