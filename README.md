@@ -19,7 +19,7 @@ the values in the config file.
 To make the application available through http and https ports use the following
 apache 2.4 configuration.
 
-´´´sh
+```
 <VirtualHost *:80>
 	ServerName proxy.<domain>.dk
 
@@ -70,16 +70,16 @@ apache 2.4 configuration.
 	BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 </VirtualHost>
 </IfModule>
-´´´
+```
 
 ## Supervisor
 To make the node application run at all time use supervisor.
 
-´´´sh
+```
 nano -w /etc/supervisor/conf.d/proxy.conf
-´´´
+```
 
-´´´sh
+```
 [program:maps-proxy]
 command=node <path>/app.js
 autostart=true
@@ -88,4 +88,4 @@ environment=NODE_ENV=production
 stderr_logfile=/var/log/maps_proxy.err.log
 stdout_logfile=/var/log/maps_proxy.out.log
 user=deploy
-´´´
+```
