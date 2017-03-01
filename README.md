@@ -75,11 +75,11 @@ apache 2.4 configuration.
 ## Supervisor
 To make the node application run at all time use supervisor.
 
-```sh
+´´´sh
 nano -w /etc/supervisor/conf.d/proxy.conf
-```
+´´´
 
-```sh
+´´´sh
 [program:maps-proxy]
 command=node <path>/app.js
 autostart=true
@@ -88,4 +88,4 @@ environment=NODE_ENV=production
 stderr_logfile=/var/log/maps_proxy.err.log
 stdout_logfile=/var/log/maps_proxy.out.log
 user=deploy
-```
+´´´
