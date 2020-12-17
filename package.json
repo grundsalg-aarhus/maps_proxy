@@ -10,13 +10,13 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-eslint": "^3.0.1",
     "istanbul": "^0.4.5",
-    "mocha": "^2.4.5",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.6",
     "should": "^8.2.2",
-    "supertest": "^1.2.0"
+    "supertest": "^6.0.1"
   },
   "scripts": {
     "live": "node app.js",
