@@ -69,6 +69,8 @@ let API = function (app, logger, cognito, bunyt, midttrafik, options) {
     if (req.params.hasOwnProperty('id')) {
       cognito.getIndustryById(req.params.id).then(function (json) {
         res.status(200).json(json);
+      }, function (error) {
+        res.status(500).send('Error with backend.');
       });
     }
     else {
@@ -86,6 +88,8 @@ let API = function (app, logger, cognito, bunyt, midttrafik, options) {
     if (req.params.hasOwnProperty('type')) {
       bunyt.getInstitutionByType(req.params.type).then(function (json) {
         res.status(200).json(json);
+      }, function (error) {
+        res.status(500).send('Error with backend.');
       });
     }
     else {
@@ -100,13 +104,15 @@ let API = function (app, logger, cognito, bunyt, midttrafik, options) {
   app.get('/api/midttrafik', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*');
 
-    if (req.hasOwnProperty('query')) {
+    if (req.hasOwnProperty('query') && Object.keys(req.query).length !== 0) {
       midttrafik.getLayer(req.query).then(function (json) {
         res.status(200).json(json);
+      }, function (error) {
+        res.status(500).send('Error with backend.');
       });
     }
     else {
-      self.logger.error('API: missing id parameter in cognito branch.');
+      self.logger.error('API: query parameter in midttrafik branch.');
       res.status(500).send('Missing parameter.');
     }
   });
