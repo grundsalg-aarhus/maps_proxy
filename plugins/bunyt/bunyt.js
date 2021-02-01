@@ -50,7 +50,7 @@ BUnyt.prototype.getInstitutionByType = function getInstitutionByType(type) {
         deferred.resolve(institution[type]);
       }
       else {
-        request(self.config.url, function (error, response, body) {
+        request(self.config.url, { timeout: 1500 }, function (error, response, body) {
           if (error || response.statusCode !== 200) {
             deferred.reject(new Error('bunyt.dk service did not return result'));
           }

@@ -56,7 +56,7 @@ Midttrafik.prototype.getLayer = function getLayer(parameters) {
         // Build URL.
         let url = 'http://87.54.23.210/geoserver/ows?' + query;
 
-        request(url, function (error, response, body) {
+        request(url, { timeout: 1500 }, function (error, response, body) {
           if (error || response.statusCode !== 200) {
             deferred.reject(new Error('Midttrafik service did not return result'));
           }

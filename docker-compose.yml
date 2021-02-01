@@ -27,7 +27,7 @@ services:
 
   node:
     image: node:14
-    #command: npm run fake
+    command: npm run fake
     networks:
       - app
     ports:
