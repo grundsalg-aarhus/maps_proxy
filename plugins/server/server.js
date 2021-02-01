@@ -15,6 +15,10 @@ module.exports = function (options, imports, register) {
   // Start the express app.
   var app = express();
 
+  // Cors handling.
+  var cors = require('cors');
+  app.use(cors());
+
   // Connect middleware extension.
   var bodyParser = require('body-parser');
   var favicon = require('serve-favicon');
